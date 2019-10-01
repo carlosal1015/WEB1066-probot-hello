@@ -5,7 +5,7 @@ services:
 env:
   - NODE_VERSION=8-jessie
   - NODE_VERSION=10-jessie
-# And so on :)
+
 script:
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
   - docker build -t node:$NODE_VERSION --build-arg NODE_IMAGE="node:${NODE_VERSION}" .
@@ -57,7 +57,7 @@ jobs:
       script:
       - docker run -rm $DOCKER_USERNAME/probot-hello:$NODE_VERSION-$(git rev-parse HEAD)
       env:
-      - NODE_VERSION=10-jessie
+      - NODE_VERSION=8-jessie
       - NPM_TARGET=lint
    - stage: npm-targets
       name: "Test 10-jessie"
@@ -66,5 +66,5 @@ jobs:
       - docker run -rm $DOCKER_USERNAME/probot-hello:$NODE_VERSION-$(git rev-parse HEAD)
       if: branch = master
       env:
-      - NODE_VERSION=10-jessie
+      - NODE_VERSION=8-jessie
       - NPM_TARGET=coverage
